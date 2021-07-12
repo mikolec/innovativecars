@@ -1,16 +1,31 @@
+/** 
+ * @author Mikołaj Lechtański <mikolaj.lechtanski@accenture.com> 
+ * @date 07.07.2021 
+ * @description Test class checking NewCaseAfterVehicleRemoval trigger
+**/
 @isTest
 private with sharing class NewCaseAfterVehicleRemovalTest {
 	@isTest
-    static void createVehicleandRemove() {
-       Vehicle__c v = new Vehicle__c(Brand__c='Tesla', 
-                                     Model__c='Model T', 
-                                     Name='1234567890', 
-                                     State__c='Nowy');
-        insert v;
-        delete v;
+  static void removeVehicleTest() {
+    Vehicle__c vehicle = TestHelpers.createTestVehicle();
+    delete vehicle;
 
-        System.assertEquals(1, [ SELECT count() 
-                                   FROM Case 
-                                  WHERE Subject = 'Sprawdzenie utylizacji pojazdu']);    
-    }
+    System.assertEquals(1, [
+      SELECT count() 
+      FROM Case 
+      WHERE Subject = :Constants.VEHICLE_REMOVAL_MSG_SUBJECT
+    ]);    
+  }
+
+  @isTest
+  static void removeVehicleWithTelemetryTest() {
+    Vehicle__c vehicle = TestHelpers.createTestVehicleWithTelemetries(10);
+    delete vehicle;
+
+    System.assertEquals(1, [
+      SELECT count() 
+      FROM Case 
+      WHERE Subject = :Constants.VEHICLE_REMOVAL_MSG_SUBJECT
+    ]);    
+  }
 }
