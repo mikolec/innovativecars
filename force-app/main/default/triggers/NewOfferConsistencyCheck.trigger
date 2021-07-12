@@ -14,13 +14,19 @@ trigger NewOfferConsistencyCheck on Offer__c (before insert, before update) {
   }
 
   List<Offer__c> existingOffersVehiclesPresent = [
-    SELECT Vehicle__c, Showroom__c, Showroom__r.Name 
+    SELECT Vehicle__c, Showroom__r.Name 
     FROM Offer__c 
     WHERE present__c = True AND Vehicle__c IN :vehiclesPresentShowroom.keySet()
   ];
+  Map<Id, String> mapVehiclesToShowroomNames = new Map<Id, String>();
+  for (Offer__c offer : existingOffersVehiclesPresent) {
+    mapVehiclesToShowroomNames.put(offer.Vehicle__c, offer.Showroom__r.Name);
+  }
   
-  for(Offer__c offer : existingOffersVehiclesPresent) {
-    offer.addError('Pojazd jez juz dostępny w salonie ' + offer.Showroom__r.Name); 
+  for (Offer__c offer : Trigger.new) {
+    if(mapVehiclesToShowroomNames.containsKey(offer.Vehicle__c)) {
+      offer.addError('Pojazd jest już dostępny w salonie ' + mapVehiclesToShowroomNames.get(offer.Vehicle__c));
+    }
   }
 
 }
