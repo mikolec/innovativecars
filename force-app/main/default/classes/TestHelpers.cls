@@ -7,7 +7,9 @@
 public with sharing class TestHelpers {
   static final String T_ACCOUNT_NAME = 'Konto testowe';
   static final String T_SHOWROOM_NAME = 'Salon testowy';
-
+  static final String T_VEHICLE_BRAND = 'Tesla';
+  static final String T_VEHICLE_MODEL = 'Model testowy';
+  static final String T_VEHICLE_NAME_PREFIX = '90000';
 
   public static List<Account> createTestAccounts(Integer count) {
     List<Account> accs = new List<Account>();
@@ -33,6 +35,25 @@ public with sharing class TestHelpers {
   public static Showroom__c createTestShowroom() {
     return createTestShowrooms(1)[0];
   }
+  
+  public static List<Vehicle__c> createTestVehicles(Integer count) {
+    List<Vehicle__c> vehicles = new List<Vehicle__c>();
 
+    for(Integer i = 0; i < count; i++) {
+      vehicles.add(
+        new Vehicle__c(
+          Brand__c = T_VEHICLE_BRAND, 
+          Model__c = T_VEHICLE_MODEL + (i + 1), 
+          Name = T_VEHICLE_NAME_PREFIX + (i + 1), 
+          State__c = 'Nowy'
+        )
+      );
+    }
+    insert vehicles;
+    return vehicles;
+  }
+  public static Vehicle__c createTestVehicle() {
+    return createTestvehicles(1)[0];
+  }  
 
 }
