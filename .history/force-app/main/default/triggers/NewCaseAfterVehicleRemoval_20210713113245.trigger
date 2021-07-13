@@ -15,13 +15,13 @@ trigger NewCaseAfterVehicleRemoval on Vehicle__c (before delete) {
       'Dane utylizowanego pojazdu: \nMarka: {0}\nModel: {1}\nNr seryjny: {2}\n', 
       new String[]{vehicle.Brand__c, vehicle.Model__c, vehicle.Name});
 
-    Case rCase = new Case(Subject = Constants.VEHICLE_REMOVAL_MSG_SUBJECT,
+    Case c = new Case(Subject = Constants.VEHICLE_REMOVAL_MSG_SUBJECT,
       Description = description,
       Status = 'New',
       Origin = 'Internal'
     );
 
-    Database.SaveResult result = Database.insert(rCase);
+    Database.SaveResult result = Database.insert(c);
     
   }
 }

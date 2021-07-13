@@ -5,23 +5,18 @@
  * @param before insert, before update
 **/
 trigger NewOfferConsistencyCheck on Offer__c (before insert, before update) {
-
+  // Map<Ids> vehiclesPresentInOffer = new Map<Ids, Ids>();
   Map<Id, Id> vehiclesPresentShowroom = new Map<Id, Id>();
   for (Offer__c offer : Trigger.new) {
-
-    if (offer.present__c) {
-      if (vehiclesPresentShowroom.containsKey(offer.Vehicle__c)) {
-        offer.addError(Constants.VEHICLE_DUPLICATE_ERROR_MSG);
-      } else {
-        vehiclesPresentShowroom.put(offer.Vehicle__c, offer.Showroom__c);
-      }
+    if(offer.present__c) {
+      vehiclesPresentShowroom.put(offer.Vehicle__c, offer.Showroom__c);
     }
   }
 
   List<Offer__c> existingOffersVehiclesPresent = [
     SELECT Vehicle__c, Showroom__r.Name 
     FROM Offer__c 
-    WHERE Present__c = True AND Vehicle__c IN :vehiclesPresentShowroom.keySet()
+    WHERE present__c = True AND Vehicle__c IN :vehiclesPresentShowroom.keySet()
   ];
   Map<Id, String> mapVehiclesToShowroomNames = new Map<Id, String>();
   for (Offer__c offer : existingOffersVehiclesPresent) {
@@ -29,7 +24,7 @@ trigger NewOfferConsistencyCheck on Offer__c (before insert, before update) {
   }
   
   for (Offer__c offer : Trigger.new) {
-    if (offer.Present__c && mapVehiclesToShowroomNames.containsKey(offer.Vehicle__c)) {
+    if(mapVehiclesToShowroomNames.containsKey(offer.Vehicle__c)) {
       offer.addError(Constants.VEHICLE_AVAILABLE_ERROR_MSG + ' ' + mapVehiclesToShowroomNames.get(offer.Vehicle__c));
     }
   }

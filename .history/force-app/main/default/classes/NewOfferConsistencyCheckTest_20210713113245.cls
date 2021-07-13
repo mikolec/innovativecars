@@ -22,7 +22,7 @@ private class NewOfferConsistencyCheckTest {
     Test.stopTest();
         
     System.assert(!result.isSuccess());
-    System.assertEquals(Constants.VEHICLE_AVAILABLE_ERROR_MSG + ' ' + showroom1.Name, result.getErrors()[0].getMessage());
+    System.assertEquals('Pojazd jest już dostępny w salonie ' + showroom1.Name, result.getErrors()[0].getMessage());
   }
 
   @isTest 
@@ -42,31 +42,6 @@ private class NewOfferConsistencyCheckTest {
     Test.stopTest();
         
     System.assert(result.isSuccess());
-  }
-
-  @isTest 
-  static void insert2OfferDoubleVehiclesPresent() {
-    
-    List<Showroom__c> showrooms = TestHelpers.createTestShowrooms(2);
-    Showroom__c showroom1 = showrooms[0];
-    Showroom__c showroom2 = showrooms[1];
-    Showroom__c showroom3 = showrooms[2];
-    Vehicle__c vehicle = TestHelpers.createTestVehicle();
-
-    Offer__c offer = new Offer__c(Vehicle__c = vehicle.Id, Showroom__c = showroom1.Id, Present__c = False);
-    insert offer;
-
-    List<Offer__c> testOffers = new List<Offer__c>();
-    testOffers.add(new Offer__c(Vehicle__c = vehicle.Id, Showroom__c = showroom2.Id, Present__c = True));
-    testOffers.add(new Offer__c(Vehicle__c = vehicle.Id, Showroom__c = showroom3.Id, Present__c = True));
- 
-    Test.startTest();
-      Database.SaveResult[] results = Database.insert(testOffers, false);
-    Test.stopTest();
-        
-    System.assert(results[0].isSuccess());
-    System.assert(!results[1].isSuccess());
-    System.assertEquals(Constants.VEHICLE_DUPLICATE_ERROR_MSG, results[1].getErrors()[0].getMessage());
   }
 
 	@isTest 
@@ -119,8 +94,8 @@ private class NewOfferConsistencyCheckTest {
     
     System.assert(!results[0].isSuccess());
     System.assert(!results[1].isSuccess());
-    System.assertEquals(Constants.VEHICLE_AVAILABLE_ERROR_MSG + ' ' + showroom1.Name, results[0].getErrors()[0].getMessage());
-    System.assertEquals(Constants.VEHICLE_AVAILABLE_ERROR_MSG + ' ' + showroom2.Name, results[1].getErrors()[0].getMessage());
+    System.assertEquals('Pojazd jest już dostępny w salonie ' + showroom1.Name, results[0].getErrors()[0].getMessage());
+    System.assertEquals('Pojazd jest już dostępny w salonie ' + showroom2.Name, results[1].getErrors()[0].getMessage());
 
   }
 

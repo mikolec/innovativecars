@@ -10,7 +10,7 @@ trigger NewOfferConsistencyCheck on Offer__c (before insert, before update) {
   for (Offer__c offer : Trigger.new) {
 
     if (offer.present__c) {
-      if (vehiclesPresentShowroom.containsKey(offer.Vehicle__c)) {
+      if(vehiclesPresentShowroom.containsKey(offer.Vehicle__c)) {
         offer.addError(Constants.VEHICLE_DUPLICATE_ERROR_MSG);
       } else {
         vehiclesPresentShowroom.put(offer.Vehicle__c, offer.Showroom__c);

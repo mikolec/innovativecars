@@ -1,8 +1,4 @@
-/**
- * @description       : Class containing helper methods esed in various test methods
- * @author            : Mikołaj Lechtański
- * @last modified on  : 13.07.2021
-**/
+
 
 public with sharing class TestHelpers {
   static final String T_ACCOUNT_NAME = 'Konto testowe';
@@ -11,11 +7,6 @@ public with sharing class TestHelpers {
   static final String T_VEHICLE_MODEL = 'Model testowy';
   static final String T_VEHICLE_NAME_PREFIX = '90000';
 
-  /**
-  * @description Creates a number of test accounts
-  * @param Integer count (number of account to create)
-  * @return List<Account> 
-  **/
   public static List<Account> createTestAccounts(Integer count) {
     List<Account> accs = new List<Account>();
     for (Integer i = 0; i < count; i++) {
@@ -25,19 +16,10 @@ public with sharing class TestHelpers {
     return accs;
   }
 
-  /**
-  * @description Creates 1 test account
-  * @return Account 
-  **/
   public static Account createTestAccount() {
     return createTestAccounts(1)[0];
   }
 
-  /**
-  * @description Creates a number of test showrooms
-  * @param Integer count (number of showrooms to create)
-  * @return List<Showroom__c> 
-  **/
   public static List<Showroom__c> createTestShowrooms(Integer count) {
     List<Showroom__c> showrooms = new List<Showroom__c>();
     Account acc = createTestAccount();
@@ -47,20 +29,10 @@ public with sharing class TestHelpers {
     insert showrooms;
     return showrooms;
   }
-
-  /**
-  * @description Creates 1 test showroom record
-  * @return Showroom__c 
-  **/
   public static Showroom__c createTestShowroom() {
     return createTestShowrooms(1)[0];
   }
 
-  /**
-  * @description Creates a number of test vehicles
-  * @param Integer count (number of vehicles to create)
-  * @return List<Vehicle__c> 
-  **/
   public static List<Vehicle__c> createTestVehicles(Integer count) {
     List<Vehicle__c> vehicles = new List<Vehicle__c>();
  
@@ -77,20 +49,10 @@ public with sharing class TestHelpers {
     insert vehicles;
     return vehicles;
   }
-
-  /**
-  * @description Creates 1 test vehicle record
-  * @return Vehicle__c 
-  **/
   public static Vehicle__c createTestVehicle() {
     return createTestvehicles(1)[0];
   }
 
-  /**
-  * @description Creates a vehicle with a number of test telemetry records
-  * @param Integer teleCount (number of telemetries to create for the vehicle)
-  * @return Vehicle__c 
-  **/
   public static Vehicle__c createTestVehicleWithTelemetries(Integer teleCount) {
     
     Vehicle__c vehicle = createTestVehicle();
@@ -112,11 +74,6 @@ public with sharing class TestHelpers {
 
     return vehicle;
   }
-
-  /**
-  * @description Creates a test vehicle record containing 1 telemetry record related
-  * @return Vehicle__c 
-  **/
   public static Vehicle__c createTestVehicleWithTelemtry() {
     return createTestVehicleWithTelemetries(1);
   }
