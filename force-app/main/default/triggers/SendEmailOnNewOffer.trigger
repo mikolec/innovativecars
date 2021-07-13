@@ -10,18 +10,25 @@ trigger SendEmailOnNewOffer on Offer__c (after insert) {
   String subject = 'Pojawily sie nowe oferty';
   String body = 'W systemie pojawily sie nowe oferty: \n';
 
-  for(Offer__c o : Trigger.new) {
-    Vehicle__c v = [SELECT Name, Brand__c, Model__c FROM Vehicle__c WHERE Id = :o.Vehicle__c LIMIT 1][0];
-    body += 'Dodano pojazd: ' + v.Brand__c + ' ' + v.Model__c + ' ( ' + v.Name + ' ) ';
-    if(o.Showroom__c != null) {
-      Showroom__c s = [SELECT Name FROM Showroom__c WHERE Id = :o.Showroom__c LIMIT 1][0];
-      body += 'do salonu: ' + s.Name + '.';
+  for(Offer__c offer : [
+    SELECT Vehicle__r.Name, Vehicle__r.Brand__c, Vehicle__r.Model__c, Showroom__r.Name, Present__c, Showroom__c, Vehicle__c
+    FROM Offer__c 
+    WHERE Id IN :Trigger.new
+  ] ) {
+    body += String.format('Dodano pojazd: {0} {1} (nr seryjny: {2} )', 
+      new String[]{offer.Vehicle__r.Brand__c, offer.Vehicle__r.Model__c, offer.Vehicle__r.Name}
+    );
+
+    if(offer.Showroom__c != null) {
+      body += 'do salonu: ' + offer.Showroom__r.Name;
     }
-    if(o.Present__c) {
-      body += ' (dostępny fizycznie w salonie) ';
+    
+    if(offer.Present__c) {
+      body += ' (dostępny fizycznie w salonie).\n';
     } else {
-      body += ' (dostępny wirtuanie w salonie) ';
+      body += ' (dostępny wirtuanie w salonie).\n';
     }
   }
+
   EmailManager.sendMailAsync(address, subject, body);
 }
