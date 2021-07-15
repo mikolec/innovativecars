@@ -5,6 +5,9 @@
 **/
 @isTest
 private class NewOfferConsistencyCheckTest {
+  /**
+  * @description Negative test method creating one vehicle present and checking adding the same vehicle again
+  **/
 	@isTest 
   static void insertOfferVehiclePresent() {
     
@@ -25,6 +28,9 @@ private class NewOfferConsistencyCheckTest {
     System.assertEquals(Constants.VEHICLE_AVAILABLE_ERROR_MSG + ' ' + showroom1.Name, result.getErrors()[0].getMessage());
   }
 
+  /**
+  * @description Positive test method creating one vehicle avaiilable virtually (not present) and checking adding the same vehicle again to another showroom
+  **/
   @isTest 
   static void insertOfferVehicleNotPresent() {
     
@@ -44,6 +50,9 @@ private class NewOfferConsistencyCheckTest {
     System.assert(result.isSuccess());
   }
 
+  /**
+  * @description Negative test method creating one vehicle not present and checking adding the same vehicle again to two other showrooms being present
+  **/
   @isTest 
   static void insert2OfferDoubleVehiclesPresent() {
     
@@ -69,6 +78,9 @@ private class NewOfferConsistencyCheckTest {
     System.assertEquals(Constants.VEHICLE_DUPLICATE_ERROR_MSG, results[1].getErrors()[0].getMessage());
   }
 
+  /**
+  * @description Positive test method creating one vehicle present in showroom 1 and checking adding the same vehicle virtually to another showroom and adding another vehicle present in the first showroom
+  **/
 	@isTest 
   static void insert2Offers() {
     
@@ -94,6 +106,9 @@ private class NewOfferConsistencyCheckTest {
     System.assert(results[1].isSuccess());
   }
 
+  /**
+  * @description Negative test method creating two vehicles present in 2 showrooms and checking adding the same vehicles again to oposite showrooms
+  **/
 	@isTest 
   static void insert2OffersVehiclePresent() {
     

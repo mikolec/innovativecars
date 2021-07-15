@@ -5,6 +5,9 @@
 **/
 @isTest
 private with sharing class NewCaseAfterVehicleRemovalTest {
+  /**
+  * @description test method checking if a case was created after vehicle removal
+  **/
 	@isTest
   static void removeVehicleTest() {
     Vehicle__c vehicle = TestHelpers.createTestVehicle();
@@ -17,6 +20,9 @@ private with sharing class NewCaseAfterVehicleRemovalTest {
     ]);    
   }
 
+  /**
+  * @description test method checking if a case was created after vehicle with telemetry removal
+  **/
   @isTest
   static void removeVehicleWithTelemetryTest() {
     Vehicle__c vehicle = TestHelpers.createTestVehicleWithTelemetries(10);
