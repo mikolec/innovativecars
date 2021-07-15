@@ -9,33 +9,31 @@
 @isTest
 public with sharing class RenovationCaseRequestTest {
   //Test constants
-  static final String T_SHOWROOM_NAME = 'Test Showroom';
+  
 
   @TestSetup
   static void setup(){
     Showroom__c showroom = TestHelpers.createTestShowroom();
 
-    List<Case> cases = new List<Case>();
-
-    for(Integer i = 0; i < 100; i++) {
-      Case renCase = new Case(Status = 'New', 
-        Origin = 'Inner', 
-        Subject = 'Renovation Case: ' + T_SHOWROOM_NAME, 
-        Description = 'Renowacja w salonie: ' + T_SHOWROOM_NAME + ' (' + 'TS' + i + ').', 
-        Showroom__c = showroom.Id);
-      cases.add(renCase);
-    }
-    insert cases;
+    Case renCase = new Case(
+      Status = 'New', 
+      Origin = 'Inner', 
+      Subject = 'Renovation Case: ' + Constants.T_SHOWROOM_NAME, 
+      Description = 'Renowacja w salonie: ' + Constants.T_SHOWROOM_NAME, 
+      Showroom__c = showroom.Id
+    );
+    insert renCase;
   }
 
-  static testmethod void renovationCaseRequestTestQueueable() {
-    List<Case> cases = [SELECT Id FROM Case WHERE Status = 'New' AND Subject LIKE 'Renovation Case%'];
+  @isTest
+  static void renovationCaseRequestTestQueueable() {
+    Case renCase = [SELECT Id FROM Case WHERE Status = 'New' AND Subject LIKE 'Renovation Case%' LIMIT 1][0];
 
-    RenovationCaseRequest req = new RenovationCaseRequest(cases);
+    RenovationCaseRequest req = new RenovationCaseRequest(renCase);
     Test.startTest();
     System.enqueueJob(req);
     Test.stopTest();
 
-    System.assertEquals(100, [SELECT Count() FROM Case WHERE Status = 'Completed' AND Subject LIKE 'Renovation Case%']);
+    System.assertEquals(1, [SELECT Count() FROM Case WHERE Status = 'Completed' AND Subject LIKE 'Renovation Case%' LIMIT 1]);
   }
 }

@@ -6,7 +6,6 @@
 
 public with sharing class TestHelpers {
   static final String T_ACCOUNT_NAME = 'Konto testowe';
-  static final String T_SHOWROOM_NAME = 'Salon testowy';
   static final String T_VEHICLE_BRAND = 'Tesla';
   static final String T_VEHICLE_MODEL = 'Model testowy';
   static final String T_VEHICLE_NAME_PREFIX = '90000';
@@ -27,7 +26,7 @@ public with sharing class TestHelpers {
     List<Showroom__c> showrooms = new List<Showroom__c>();
     Account acc = createTestAccount();
     for(Integer i = 0; i < count; i++) {
-      showrooms.add(new Showroom__c(Name = T_SHOWROOM_NAME + (i+1), Account__c = acc.Id));
+      showrooms.add(new Showroom__c(Name = Constants.T_SHOWROOM_NAME + (i+1), Account__c = acc.Id));
     }
     insert showrooms;
     return showrooms;
