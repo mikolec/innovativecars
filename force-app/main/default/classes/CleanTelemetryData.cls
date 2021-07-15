@@ -8,7 +8,7 @@ public with sharing class CleanTelemetryData implements Database.Batchable<sObje
 
   public Integer recordsProcessed = 0;
   /**
-  * @description "instance member to retain state across transactions"
+  * @description instance member to retain state across transactions
   * @param Database.BatchableContext bc 
   * @return Database.QueryLocator 
   **/

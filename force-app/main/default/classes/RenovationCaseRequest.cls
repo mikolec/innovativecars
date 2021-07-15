@@ -3,16 +3,6 @@
  * @author            : Mikołaj Lechtański
  * @last modified on  : 15.07.2021
 **/
-
-/** 
- * @author Mikołaj Lechtański <mikolaj.lechtanski@accenture.com> 
- * @date 08.07.2021 
- * @description Queuable method that takes cases with status New, sends an Http request 
- * and updates the cases' Status to Completed or Failed depending on req result
- * @params List of Cases with Status set to New
- * @return -
- **/
-
 public with sharing class RenovationCaseRequest implements Queueable, Database.AllowsCallouts {
   
   private Case renCase;

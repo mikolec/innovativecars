@@ -1,10 +1,8 @@
-/** 
- * @author Mikołaj Lechtański <mikolaj.lechtanski@accenture.com> 
- * @date 08.07.2021 
- * @description The trigger fires creating new Offer
- * After trigger is fired an email is being sent
- **/
-
+/**
+ * @description       : The trigger fires creating new Offer. After trigger is fired an email is being sent.
+ * @author            : Mikołaj Lechtański
+ * @last modified on  : 15.07.2021
+**/
 trigger SendEmailOnNewOffer on Offer__c (after insert) {
   String address = 'mikolec@gmail.com';
   String subject = 'Pojawily sie nowe oferty';

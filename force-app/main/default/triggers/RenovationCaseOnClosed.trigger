@@ -1,10 +1,8 @@
-/** 
- * @author Mikołaj Lechtański <mikolaj.lechtanski@accenture.com> 
- * @date 12.07.2021 
- * @description The trigger fires on Showroom Status being set to Closed
- * After trigger is fired new Case is created and HTTP Request is being sent
- **/
-
+/**
+ * @description       : The trigger fires on Showroom Status being set to Closed. After trigger is fired new Case is created and HTTP Request is being sent.SELECT  FROM Account
+ * @author            : Mikołaj Lechtański
+ * @last modified on  : 15.07.2021
+**/
  trigger RenovationCaseOnClosed on Showroom__c (after update) {
   List<Showroom__c> showrooms = new List<Showroom__c>();
   for(Showroom__c showroom : Trigger.new) {
@@ -16,8 +14,5 @@
 
   CreateShowroomsRenovationCase newRenCaseJob = new CreateShowroomsRenovationCase(showrooms);
   ID jobId = System.enqueueJob(newRenCaseJob);
-
-  // RenovationCaseRequest requestJob = new RenovationCaseRequest(cases);
-  // ID jobId = System.enqueueJob(requestJob);
 
 }

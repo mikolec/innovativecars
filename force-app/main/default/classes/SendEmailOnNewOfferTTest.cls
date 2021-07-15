@@ -6,6 +6,9 @@
 @isTest
 public with sharing class SendEmailOnNewOfferTTest {
   
+  /**
+  * @description tst creating two offers and checking trigger SendEmailOnNewOffer
+  **/
   @isTest
   static void create2Offers() {
 

@@ -11,6 +11,9 @@ public with sharing class RenovationCaseRequestTest {
   //Test constants
   
 
+  /**
+  * @description tests setup
+  **/
   @TestSetup
   static void setup(){
     Showroom__c showroom = TestHelpers.createTestShowroom();
@@ -25,6 +28,9 @@ public with sharing class RenovationCaseRequestTest {
     insert renCase;
   }
 
+  /**
+  * @description main test method checking RenovationCaseRequest class
+  **/
   @isTest
   static void renovationCaseRequestTestQueueable() {
     Case renCase = [SELECT Id FROM Case WHERE Status = 'New' AND Subject LIKE 'Renovation Case%' LIMIT 1][0];

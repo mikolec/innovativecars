@@ -5,7 +5,13 @@
  **/
 
 public with sharing class EmailManager {
-    // Public method
+    
+    /**
+    * @description Public method for sending emails asyncronously
+    * @param String address (email address)
+    * @param String subject (email subject)
+    * @param String body (email body)
+    **/
     @future
     public static void sendMailAsync(String address, String subject, String body) {
         // Create an email message object
@@ -23,7 +29,12 @@ public with sharing class EmailManager {
         inspectResults(results);
     }
     
-    // Helper method
+
+    /**
+    * @description Helper method
+    * @param Messaging.SendEmailResult[] results 
+    * @return Boolean 
+    **/
     private static Boolean inspectResults(Messaging.SendEmailResult[] results) {
         Boolean sendResult = true;
         

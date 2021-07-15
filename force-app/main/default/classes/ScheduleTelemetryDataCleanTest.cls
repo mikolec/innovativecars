@@ -3,7 +3,6 @@
  * @date 08.07.2021 
  * @description Test class for testing CleanTelemetryData. This methods removes telemetry results every 5 minutes.
  **/
-
 @isTest
 private class ScheduleTelemetryDataCleanTest {
   
@@ -12,7 +11,12 @@ private class ScheduleTelemetryDataCleanTest {
   // CRON: Every 5 minutes every day" 
   public static final String CRON_EXP = '0 */5 * ? * *';
   
-  static testmethod void testScheduledJob() {
+  /**
+  * @description main test method for ScheduleTelemetryDataClean class
+  * @return testmethod 
+  **/
+  @isTest
+  static void testScheduledJob() {
     // Create some telemetry data
     List<Telemetry__c> telys = new List<Telemetry__c>();
 
