@@ -15,7 +15,6 @@ public with sharing class RenovationCaseRequest implements Queueable, Database.A
     this.renCase = renCase;
   }
 
-
   /**
   * @description instance member method to execute job of sending new renovation case request
   * @param QueueableContext context 
@@ -29,11 +28,14 @@ public with sharing class RenovationCaseRequest implements Queueable, Database.A
     req.setEndpoint(url);
     req.setMethod('POST');
 
-    String body = '{\n' + 
-      'title: ' + renCase.Subject + ',\n' +
-      'body: ' + renCase.Description + ',\n' +
-      'caseId: ' + renCase.Id + ',\n' +
-    '}';
+    String[] reqBodyParts = new List<String> {
+      '{',
+      'title: ' + renCase.Subject + ',',
+      'body: ' + renCase.Description + ',',
+      'caseId: ' + renCase.Id + ',',
+      '}'
+    };
+    String body = String.join(reqBodyParts, '\n');
     req.setBody(JSON.serialize(body));
     HttpResponse res = server.send(req);
 

@@ -5,15 +5,10 @@
  **/
 
 public with sharing class TestHelpers {
-  static final String T_ACCOUNT_NAME = 'Konto testowe';
-  static final String T_VEHICLE_BRAND = 'Tesla';
-  static final String T_VEHICLE_MODEL = 'Model testowy';
-  static final String T_VEHICLE_NAME_PREFIX = '90000';
-
   public static List<Account> createTestAccounts(Integer count) {
     List<Account> accs = new List<Account>();
     for(Integer i = 0; i < count; i++) {
-      accs.add(new Account(Name = T_ACCOUNT_NAME + (i+1)));
+      accs.add(new Account(Name = Constants.T_ACCOUNT_NAME + (i+1)));
     }
     insert accs;
     return accs;
@@ -41,10 +36,10 @@ public with sharing class TestHelpers {
     for(Integer i = 0; i < count; i++) {
       vehicles.add(
         new Vehicle__c(
-          Brand__c = T_VEHICLE_BRAND, 
-          Model__c = T_VEHICLE_MODEL + (i + 1), 
-          Name = T_VEHICLE_NAME_PREFIX + (i + 1), 
-          State__c = 'Nowy'
+          Brand__c = Constants.T_VEHICLE_BRAND, 
+          Model__c = Constants.T_VEHICLE_MODEL + (i + 1), 
+          Name = Constants.T_VEHICLE_NAME_PREFIX + (i + 1), 
+          State__c = Constants.T_VEHICLE_STATE_NEW
         )
       );
     }

@@ -21,7 +21,7 @@ public with sharing class CreateShowroomsRenovationCase implements Queueable {
   **/
   public void execute(QueueableContext context) {
     for (Showroom__c showroom : showrooms) {
-      // perform other processing or callout
+      
       Case newRenovationCase = new Case(
         Status = 'New', 
         Origin = 'Inner', 

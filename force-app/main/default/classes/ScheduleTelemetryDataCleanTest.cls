@@ -18,31 +18,23 @@ private class ScheduleTelemetryDataCleanTest {
   @isTest
   static void testScheduledJob() {
     // Create some telemetry data
-    List<Telemetry__c> telys = new List<Telemetry__c>();
+    List<Telemetry__c> telemetries = new List<Telemetry__c>();
 
-    Vehicle__c vehicle = new Vehicle__c(
-      Name = '000000001',
-      Brand__c = 'Test',
-      Model__c = 'Testowy',
-      State__c = 'Nowy',
-      Power__c = 100,
-      FuelConsumption__c = 1
-    );
-    insert vehicle;
+    Vehicle__c vehicle = TestHelpers.createTestVehicle();
 
     for (Integer i=0; i<100; i++) {
       Integer randomNumber = Integer.valueof((Math.random() * 10));
       Decimal tempValue = randomNumber + 30;
       Boolean norm = Math.mod(randomNumber, 2) == 0 ? true : false;
-      Telemetry__c t = new Telemetry__c(
+      Telemetry__c telemetry = new Telemetry__c(
         Vehicle__c = vehicle.Id,
-        Type__c = 'temperatura',
+        Type__c = Constants.T_TELEMETRY_TYPE_TEMPERATURE,
         Value__c = tempValue,
         Norm__c = norm
       );
-      telys.add(t);
+      telemetries.add(telemetry);
     }
-    insert telys;
+    insert telemetries;
 
     Test.startTest();
       ScheduleTelemetryDataClean telemetryBatchDataRemoval = new ScheduleTelemetryDataClean();
@@ -50,16 +42,16 @@ private class ScheduleTelemetryDataCleanTest {
         CRON_EXP,
         telemetryBatchDataRemoval);
       
-      List<Telemetry__c> lt = [SELECT Id
+      List<Telemetry__c> testTelemetries = [SELECT Id
         FROM Telemetry__c
-        WHERE Type__c = 'temperatura'];
-      System.assertEquals(100, lt.size(), 'Telemetry data were not created.');
+        WHERE Type__c = :Constants.T_TELEMETRY_TYPE_TEMPERATURE];
+      System.assertEquals(100, testTelemetries.size(), 'Telemetry data were not created.');
     Test.stopTest();
 
-    lt = [SELECT Id
+    testTelemetries = [SELECT Id
       FROM Telemetry__c
-      WHERE Type__c = 'temperatura'];
-    System.assertEquals(0, lt.size(), 'Telemetry data were not removed.');
+      WHERE Type__c = :Constants.T_TELEMETRY_TYPE_TEMPERATURE];
+    System.assertEquals(0, testTelemetries.size(), 'Telemetry data were not removed.');
 
   }
 }

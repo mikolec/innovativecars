@@ -8,8 +8,6 @@
 
 @isTest
 public with sharing class RenovationCaseRequestTest {
-  //Test constants
-  
 
   /**
   * @description tests setup
