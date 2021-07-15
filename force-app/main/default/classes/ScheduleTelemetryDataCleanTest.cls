@@ -5,12 +5,12 @@
  **/
 
 @isTest
-private class CleanTelemetryDataTest {
+private class ScheduleTelemetryDataCleanTest {
   
   // CRON: At 02:00, on day 1 of the month" 
-  // public static String CRON_EXP = '0 0 2 1 * ? *';
+  // public static final String CRON_EXP = '0 0 2 1 * ? *';
   // CRON: Every 5 minutes every day" 
-  public static String CRON_EXP = '0 */5 * ? * *';
+  public static final String CRON_EXP = '0 */5 * ? * *';
   
   static testmethod void testScheduledJob() {
     // Create some telemetry data
@@ -43,7 +43,7 @@ private class CleanTelemetryDataTest {
     Test.startTest();
       String jobId = System.schedule('ScheduledApexTest',
         CRON_EXP,
-        new CleanTelemetryData());
+        new ScheduleTelemetryDataClean());
       
       List<Telemetry__c> lt = [SELECT Id
         FROM Telemetry__c
