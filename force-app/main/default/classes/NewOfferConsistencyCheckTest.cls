@@ -56,7 +56,7 @@ private class NewOfferConsistencyCheckTest {
   @isTest 
   static void insert2OfferDoubleVehiclesPresent() {
     
-    List<Showroom__c> showrooms = TestHelpers.createTestShowrooms(2);
+    List<Showroom__c> showrooms = TestHelpers.createTestShowrooms(3);
     Showroom__c showroom1 = showrooms[0];
     Showroom__c showroom2 = showrooms[1];
     Showroom__c showroom3 = showrooms[2];
