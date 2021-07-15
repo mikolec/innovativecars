@@ -41,9 +41,10 @@ private class ScheduleTelemetryDataCleanTest {
     insert telys;
 
     Test.startTest();
+      ScheduleTelemetryDataClean telemetryBatchDataRemoval = new ScheduleTelemetryDataClean();
       String jobId = System.schedule('ScheduledApexTest',
         CRON_EXP,
-        new ScheduleTelemetryDataClean());
+        telemetryBatchDataRemoval);
       
       List<Telemetry__c> lt = [SELECT Id
         FROM Telemetry__c
