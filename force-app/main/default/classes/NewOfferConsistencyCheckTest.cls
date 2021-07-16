@@ -7,6 +7,7 @@
 private class NewOfferConsistencyCheckTest {
   /**
   * @description Negative test method creating one vehicle present and checking adding the same vehicle again
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
 	@isTest 
   static void insertOfferVehiclePresent() {
@@ -30,6 +31,7 @@ private class NewOfferConsistencyCheckTest {
 
   /**
   * @description Positive test method creating one vehicle avaiilable virtually (not present) and checking adding the same vehicle again to another showroom
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
   @isTest 
   static void insertOfferVehicleNotPresent() {
@@ -52,6 +54,7 @@ private class NewOfferConsistencyCheckTest {
 
   /**
   * @description Negative test method creating one vehicle not present and checking adding the same vehicle again to two other showrooms being present
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
   @isTest 
   static void insert2OfferDoubleVehiclesPresent() {
@@ -80,6 +83,7 @@ private class NewOfferConsistencyCheckTest {
 
   /**
   * @description Positive test method creating one vehicle present in showroom 1 and checking adding the same vehicle virtually to another showroom and adding another vehicle present in the first showroom
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
 	@isTest 
   static void insert2Offers() {
@@ -108,6 +112,7 @@ private class NewOfferConsistencyCheckTest {
 
   /**
   * @description Negative test method creating two vehicles present in 2 showrooms and checking adding the same vehicles again to oposite showrooms
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
 	@isTest 
   static void insert2OffersVehiclePresent() {

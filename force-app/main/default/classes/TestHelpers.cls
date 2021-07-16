@@ -1,7 +1,7 @@
 /**
  * @description       : Class containing helper methods esed in various test methods
  * @author            : Mikołaj Lechtański
- * @last modified on  : 13.07.2021
+ * @last modified on  : 16.07.2021
 **/
 
 public with sharing class TestHelpers {
@@ -15,6 +15,7 @@ public with sharing class TestHelpers {
   * @description Creates a number of test accounts
   * @param Integer count (number of account to create)
   * @return List<Account> 
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
   public static List<Account> createTestAccounts(Integer count) {
     List<Account> accs = new List<Account>();
@@ -36,7 +37,8 @@ public with sharing class TestHelpers {
   /**
   * @description Creates a number of test showrooms
   * @param Integer count (number of showrooms to create)
-  * @return List<Showroom__c> 
+  * @return List<Showroom__c>
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
   public static List<Showroom__c> createTestShowrooms(Integer count) {
     List<Showroom__c> showrooms = new List<Showroom__c>();
@@ -51,6 +53,7 @@ public with sharing class TestHelpers {
   /**
   * @description Creates 1 test showroom record
   * @return Showroom__c 
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
   public static Showroom__c createTestShowroom() {
     return createTestShowrooms(1)[0];
@@ -59,7 +62,8 @@ public with sharing class TestHelpers {
   /**
   * @description Creates a number of test vehicles
   * @param Integer count (number of vehicles to create)
-  * @return List<Vehicle__c> 
+  * @return List<Vehicle__c>
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
   public static List<Vehicle__c> createTestVehicles(Integer count) {
     List<Vehicle__c> vehicles = new List<Vehicle__c>();
@@ -80,7 +84,8 @@ public with sharing class TestHelpers {
 
   /**
   * @description Creates 1 test vehicle record
-  * @return Vehicle__c 
+  * @return Vehicle__c
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
   public static Vehicle__c createTestVehicle() {
     return createTestvehicles(1)[0];
@@ -89,7 +94,8 @@ public with sharing class TestHelpers {
   /**
   * @description Creates a vehicle with a number of test telemetry records
   * @param Integer teleCount (number of telemetries to create for the vehicle)
-  * @return Vehicle__c 
+  * @return Vehicle__c
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
   public static Vehicle__c createTestVehicleWithTelemetries(Integer teleCount) {
     
@@ -115,7 +121,8 @@ public with sharing class TestHelpers {
 
   /**
   * @description Creates a test vehicle record containing 1 telemetry record related
-  * @return Vehicle__c 
+  * @return Vehicle__c
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
   public static Vehicle__c createTestVehicleWithTelemtry() {
     return createTestVehicleWithTelemetries(1);

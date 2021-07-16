@@ -7,6 +7,7 @@
 private with sharing class NewCaseAfterVehicleRemovalTest {
   /**
   * @description test method checking if a case was created after vehicle removal
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
 	@isTest
   static void removeVehicleTest() {
@@ -22,6 +23,7 @@ private with sharing class NewCaseAfterVehicleRemovalTest {
 
   /**
   * @description test method checking if a case was created after vehicle with telemetry removal
+  * @author Mikołaj Lechtański | 10.07.2021 
   **/
   @isTest
   static void removeVehicleWithTelemetryTest() {
